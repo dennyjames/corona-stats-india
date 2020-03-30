@@ -24,7 +24,7 @@ app.listen(port, function () {
 });
 
 
-setTimeout(async () => {
+setInterval(async () => {
     let response;
     try {
         response = await axios.get("https://www.mohfw.gov.in/");
@@ -79,6 +79,6 @@ setTimeout(async () => {
         }
     }
 
-}, 2000);
+}, 600000);
 
 
