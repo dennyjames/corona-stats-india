@@ -8,8 +8,8 @@ const pool = new Pool({
     database: process.env.DB_NAME,
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT,
-    max: 5
-    //ssl: true
+    max: 5,
+    ssl: true
 });
 
 module.exports = {
@@ -28,7 +28,11 @@ module.exports = {
         const client = await pool.connect()
         try {
             var result = await client.query(text, params);
-        } finally {
+        }
+        catch (err)
+        {
+            console.log(err.stack)
+        }finally {
             client.release();
         }
         return result;

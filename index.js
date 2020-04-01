@@ -25,6 +25,7 @@ app.listen(port, function () {
 
 
 setInterval(async () => {
+    console.log("Refresh job started")
     let response;
     try {
         response = await axios.get("https://www.mohfw.gov.in/");
@@ -39,7 +40,7 @@ setInterval(async () => {
     // get HTML and parse death rates
     const html = cheerio.load(response.data);
 
-    const table = html("#cases > div > div > table > tbody").children("tr").toArray();
+    const table = html("#state-data > div > div > div > div > table > tbody").children("tr").toArray()
 
     for (let row of table) {
         let result = [];
@@ -78,7 +79,7 @@ setInterval(async () => {
             }
         }
     }
-
+    console.log("Refresh job finished")
 }, 600000);
 
 
