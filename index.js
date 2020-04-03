@@ -45,6 +45,29 @@ setInterval(async () => {
     for (let row of table) {
         let result = [];
         const cells = row.children.filter(i => i.type === "tag");
+        if (cells.length === 4) {
+
+            for (let j = 0; j < cells.length; j++) {
+
+                const customCell = cells[j].children.filter(i => i.type === "tag")[0];
+                //state name
+                if (j === 0) {
+                    result.push('Overall');
+                }
+                // total_case
+                if (j === 1) {
+                    result.push(parseInt(customCell.children[0].data));
+                }
+                // recovered
+                if (j === 2) {
+                    result.push(parseInt(customCell.children[0].data));
+                }
+                //death
+                if (j === 3) {
+                    result.push(parseInt(customCell.children[0].data));
+                }
+            }
+        }
         if (cells.length === 5) {
             for (let j = 1; j < cells.length; j++) {
                 //state name
@@ -65,6 +88,8 @@ setInterval(async () => {
                 }
 
             }
+        }
+        if(result.length ===4) {
             try {
                 let rowCount = await db.query(db.sql.ifExistQuery, [result[0]]);
                 if (rowCount.rows[0] !== undefined && parseInt(rowCount.rows[0].exists) > 0)
@@ -77,7 +102,9 @@ setInterval(async () => {
             } catch (err) {
                 console.log(err.stack)
             }
+
         }
+
     }
     console.log("Refresh job finished")
 }, 600000);
