@@ -19,9 +19,17 @@ app.get("/states/", async function (req, res) {
     res.send(result.rows)
 });
 
+app.get("/timeseries/", async function (req, res) {
+
+    const timeSeries = await db.query(db.sql.selectTimeSeries);
+    res.send(timeSeries.rows);
+});
+
 app.listen(port, function () {
     console.log("Your app is listening");
 });
+
+
 
 
 setInterval(async () => {
@@ -52,7 +60,7 @@ setInterval(async () => {
                 const customCell = cells[j].children.filter(i => i.type === "tag")[0];
                 //state name
                 if (j === 0) {
-                    result.push('Overall');
+                    result.push('All India');
                 }
                 // total_case
                 if (j === 1) {
