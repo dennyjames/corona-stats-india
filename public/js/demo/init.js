@@ -183,7 +183,7 @@ $.get("/timeseries", function (data, status) {
             responsive: true,
 
             tooltips: {
-                mode: 'nearest',
+                mode: 'index',
                 intersect: false,
                 titleFontColor: '#6e707e',
                 titleFontSize: 14,
