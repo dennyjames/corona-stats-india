@@ -38,13 +38,13 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
-                <hr class="sidebar-divider d-none d-md-block">
+                <hr class="sidebar-divider">
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Covid-19 Stats - India</h1>
 
                 </div>
                 <!-- Content Row -->
-                <div class="row">
+                <div class="row text-center">
 
 
                     <div class="col-xl-4 col-md-6 mb-4">
@@ -96,13 +96,13 @@
                 <div class="row">
 
                     <!-- Bar Chart -->
-                    <div class="col-xl-12 col-lg-7">
+                    <div class="col-xl-6 col-lg-7">
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">State wise distribution</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">State wise distribution (Top 20)</h6>
                             </div>
                             <div class="card-body">
-                                <div style="height: 600px" class="chart-timeseries">
+                                <div style="height: 450px" class="chart-bar">
                                     <canvas id="myBarChart"></canvas>
                                 </div>
                             </div>
@@ -110,17 +110,18 @@
 
                     </div>
 
-                    <div class="col-xl-12 col-lg-7">
+                    <div class="col-xl-6 col-lg-7">
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Time Series</h6>
+                                <h6 class="m-0 font-weight-bold text-primary" id="timeSeriesChart-header">Spread Trend - All India</h6>
                             </div>
                             <div class="card-body">
-                                <div style="height: 600px" class="chart-bar">
-                                    <canvas id="timeSeriesChart"></canvas>
+                                <div class="card-header py-2">
+                                <select class="form-control form-control-sm" id="state-selector">
+                                </select>
                                 </div>
-                                <div class="copyright text-center my-auto">
-                                    <span>Click on a state for individual time series</span>
+                                <div style="height: 400px" class="chart-timeseries">
+                                    <canvas id="timeSeriesChart"></canvas>
                                 </div>
                             </div>
                         </div>

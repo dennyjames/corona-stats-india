@@ -32,7 +32,7 @@ app.listen(port, function () {
 
 
 
-setInterval(async () => {
+setTimeout(async () => {
     console.log("Refresh job started")
     let response;
     try {
@@ -115,6 +115,6 @@ setInterval(async () => {
 
     }
     console.log("Refresh job finished")
-}, 600000);
+}, 2000);
 
 

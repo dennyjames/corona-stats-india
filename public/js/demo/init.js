@@ -1,13 +1,8 @@
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
-var defaultLegendClickHandler = Chart.defaults.global.legend.onClick;
 
-function getBoxWidth(labelOpts, fontSize) {
-    return labelOpts.usePointStyle ?
-        fontSize * Math.SQRT2 :
-        labelOpts.boxWidth;
-};
+
 
 $.get("/all", function (data, status) {
 
@@ -103,7 +98,7 @@ $.get("/states", function (data, status) {
                         maxTicksLimit: 6
 
                     },
-                    maxBarThickness: 18
+
                 }
                 ],
                 yAxes: [{
@@ -115,9 +110,10 @@ $.get("/states", function (data, status) {
                             else
                                 return value;
 
-                        }
+                        },
 
-                    }
+                    },
+                    maxBarThickness: 15,
                 }]
             }
         }
@@ -127,45 +123,62 @@ $.get("/states", function (data, status) {
 
 $.get("/timeseries", function (data, status) {
 
+
+    const states =data.map(i=>i.state);
+    $('#state-selector').empty();
+    for(state of states)
+    {
+        $('#state-selector').append('<option  value="'+state+'">'+state+'</optoin>');
+    }
     const labels = data[0].data.map(i=>i.f1);
-    const dataSets =[];
 
-    data.forEach(
-        (item)=>
+
+   let datasets = [
+       {
+           label: 'Total Cases',
+           borderColor: '#000',
+           data:  data[0].data.map(i=>i.f2),
+           fill:false,
+           borderWidth:2,
+           pointRadius:0
+       },
         {
-            const datSet={};
-            datSet.label=item.state;
-            datSet.fill = false;
-            datSet.data =item.data.map(i=>i.f2);
-            datSet.pointRadius=2;
-            datSet.pointStyle ='circle';
-            datSet.pointBorderColor = '#bf1927';
-            if(datSet.label !== 'All India') {
-                datSet.hidden = true;
-            }
-            else {
-                datSet.hidden = false;
-                datSet.borderColor ='#587ae0';
-            }
-            dataSets.push(datSet);
-
-        }
-    );
-
+            label: 'Active',
+            borderColor: '#2e59d9',
+            data:   data[0].data.map(i=>i.f3),
+            fill:false,
+            borderWidth:2,
+            pointRadius:0
+        },
+        {
+            label: 'Recovered',
+            borderColor: '#23ba6a',
+            data:  data[0].data.map(i=>i.f4),
+            fill:false,
+            borderWidth:2,
+            pointRadius:0
+        },
+       {
+           label: 'Deceased',
+           borderColor: '#bf2424',
+           data:  data[0].data.map(i=>i.f5),
+           fill:false,
+           pointRadius:0
+       }]
     let ctx = document.getElementById("timeSeriesChart");
 
     var timeSeriesChart =new Chart(ctx, {
         type: 'line',
         data:{
             labels:labels,
-            datasets:dataSets
+            datasets:datasets
 
         },
         options: {
             maintainAspectRatio: false,
             layout: {
                 padding: {
-                    left: 5,
+                    left: -10,
                     right: 5,
                     top: 5,
                     bottom: 0
@@ -178,7 +191,6 @@ $.get("/timeseries", function (data, status) {
                 padding : 4,
                 fontStyle:'bold',
                 },
-                onClick: newLegendClickHandler
             },
             responsive: true,
 
@@ -200,22 +212,28 @@ $.get("/timeseries", function (data, status) {
             scales: {
                 xAxes: [{
                     display: true,
+                    gridLines: {
+                        display: false,
+                        drawBorder: false
+                    },
                     scaleLabel: {
                         display: true,
                         labelString: 'Date'
                     },
                     ticks: {
                         maxTicksLimit: 8,
-                        maxRotation:30,
+                        minRotation:90,
                     },
                 }],
                 yAxes: [{
                     display: true,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Total Cases'
-                    }
-                }]
+                    ticks: {
+                        minRotation:90,
+                        maxTicksLimit: 4
+
+                    },
+                },
+                ]
             }
         }
 
@@ -223,28 +241,56 @@ $.get("/timeseries", function (data, status) {
 
     })
 
-   function newLegendClickHandler(e, legendItem) {
-        let isIndia = dataSets[legendItem.datasetIndex].label==='All India';
-        let indiaIndex = 0;
-       let ci = this.chart;
-         if(!isIndia){
 
-            let meta1=    ci.getDatasetMeta(indiaIndex);
-             meta1.hidden = true;
-             let meta2=    ci.getDatasetMeta(legendItem.datasetIndex);
-             meta2.hidden = meta2.hidden === null ? !ci.data.datasets[legendItem.datasetIndex].hidden : null;
-             //defaultLegendClickHandler(e, legendItem);
-
-        }
-         else
-         {
-             let meta1=    ci.getDatasetMeta(indiaIndex);
-             meta1.hidden = meta1.hidden === null ? !ci.data.datasets[indiaIndex].hidden : null;
-         }
-       ci.update();
-    };
-
+    $( "#state-selector" ).change(function() {
+        timeSeriesChart.config.data.datasets=[];
+        timeSeriesChart.config.data.labels=[];
+        document.getElementById('timeSeriesChart-header').innerHTML='Spread Trend - '
+        let e = document.getElementById("state-selector");
+        let selected = e.selectedIndex
+        document.getElementById('timeSeriesChart-header').innerHTML='Spread Trend - '+data[selected].state;
+        let label = data[selected].data.map(i=>i.f1);
+        let dataset =
+            [
+                {
+                    label: 'Total Cases',
+                    borderColor: '#000',
+                    data:  data[selected].data.map(i=>i.f2),
+                    fill:false,
+                    borderWidth:2,
+                    pointRadius:0
+                },
+                {
+                    label: 'Active',
+                    borderColor: '#2e59d9',
+                    data:   data[selected].data.map(i=>i.f3),
+                    fill:false,
+                    borderWidth:2,
+                    pointRadius:0
+                },
+                {
+                    label: 'Recovered',
+                    borderColor: '#23ba6a',
+                    data:  data[selected].data.map(i=>i.f4),
+                    fill:false,
+                    borderWidth:2,
+                    pointRadius:0
+                },
+                {
+                    label: 'Deceased',
+                    borderColor: '#bf2424',
+                    data:  data[selected].data.map(i=>i.f5),
+                    fill:false,
+                    borderWidth:2,
+                    pointRadius:0
+                }];
+        timeSeriesChart.config.data.labels = label;
+        timeSeriesChart.config.data.datasets = dataset;
+        timeSeriesChart.update();
+    });
 });
+
+
 	
 
 
