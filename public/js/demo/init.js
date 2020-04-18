@@ -134,11 +134,11 @@ $.get("/all", function (data, status) {
     {
         i.mortalityRate = ((i.death_count/i.case_count)*100).toFixed(2) +'%';
         if(i.totaldelta !=0)
-            i.case_count= i.case_count +` (+${i.totaldelta})`;
+            i.case_count= i.case_count +`\n(+${i.totaldelta})`;
         if(i.recovereddelta !=0)
-            i.recovered_count= i.recovered_count +` (+${i.recovereddelta})`;
+            i.recovered_count= i.recovered_count +`\n(+${i.recovereddelta})`;
         if(i.deathdelta !=0)
-            i.death_count= i.death_count +` (+${i.deathdelta})`;
+            i.death_count= i.death_count +`\n(+${i.deathdelta})`;
         return i;
     })
 
@@ -155,16 +155,16 @@ $.get("/all", function (data, status) {
         ],
         columns:[                 //define the table columns
             {title:"State", field:"state",minWidth:90,formatter:"textarea"},
-            {title:"Total", field:"case_count", hozAlign:"left",minWidth:60,cssClass:"total-column-blue",
+            {title:"Total", field:"case_count", hozAlign:"left",minWidth:50,cssClass:"total-column-blue",
                 sorter:  function(a, b, aRow, bRow, column, dir, sorterParams){
                     return aRow._row.data.totalCases - bRow._row.data.totalCases;
                 },formatter:"textarea"},
-            {title:"Active", field:"activeCases", hozAlign:"left",minWidth:60,cssClass:"active-column-yellow",responsive:2},
-            {title:"Recovered", field:"recovered_count", hozAlign:"left",minWidth:60, cssClass:"recvrd-column-green",
+            {title:"Active", field:"activeCases", hozAlign:"left",minWidth:50,cssClass:"active-column-yellow",responsive:2},
+            {title:"Recovered", field:"recovered_count", hozAlign:"left",minWidth:50, cssClass:"recvrd-column-green",
                 sorter:  function(a, b, aRow, bRow, column, dir, sorterParams){
                     return aRow._row.data.recoveredCases - bRow._row.data.recoveredCases;
                 },formatter:"textarea"},
-            {title:"Deaths", field:"death_count", hozAlign:"left",minWidth:60, cssClass:"death-column-red",
+            {title:"Deaths", field:"death_count", hozAlign:"left",minWidth:50, cssClass:"death-column-red",
                 sorter:  function(a, b, aRow, bRow, column, dir, sorterParams){
                     return aRow._row.data.deathCases - bRow._row.data.deathCases;
                 },formatter:"textarea"},
