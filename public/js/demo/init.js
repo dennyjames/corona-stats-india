@@ -159,7 +159,7 @@ $.get("/all", function (data, status) {
                 sorter:  function(a, b, aRow, bRow, column, dir, sorterParams){
                     return aRow._row.data.totalCases - bRow._row.data.totalCases;
                 },formatter:"textarea"},
-            {title:"Active", field:"activeCases", hozAlign:"left",minWidth:40,cssClass:"active-column-yellow",responsive:2},
+            {title:"Active", field:"activeCases", hozAlign:"left",minWidth:60,cssClass:"active-column-yellow",responsive:2},
             {title:"Recovered", field:"recovered_count", hozAlign:"left",minWidth:60, cssClass:"recvrd-column-green",
                 sorter:  function(a, b, aRow, bRow, column, dir, sorterParams){
                     return aRow._row.data.recoveredCases - bRow._row.data.recoveredCases;
