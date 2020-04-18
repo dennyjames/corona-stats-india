@@ -109,6 +109,6 @@ setInterval(async () => {
 
     }
     console.log("Refresh job finished")
-}, 2000);
+}, 600000);
 
 
