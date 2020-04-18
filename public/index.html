@@ -44,10 +44,10 @@
 
                 </div>
                 <!-- Content Row -->
-                <div class="row text-center">
+                <div class="text-center d-flex justify-content-between">
 
 
-                    <div class="col-xl-4 col-md-6 mb-4">
+                    <div class="col-xl-4 mb-4">
                         <div class="card border-left-primary shadow h-100 py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
@@ -55,14 +55,17 @@
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total
                                             Cases
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalCases"></div>
+                                        <div class="text-center">
+                                        <div class="h6 mb-0 font-weight-bold text-gray-800" id="totalCases"></div>
+                                            <div class= "text mb-0 text-primary"><small id="totalCasesDelta"></small></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-xl-4 col-md-6 mb-4">
+                    <div class="col-xl-4  mb-4">
                         <div class="card border-left-success shadow h-100 py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
@@ -70,21 +73,27 @@
                                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Recovered
                                             Cases
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="recoveredCases"></div>
+                                        <div class="text-center">
+                                            <div class="h6 mb-0 font-weight-bold text-gray-800" id="recoveredCases"></div>
+                                            <div class= "text mb-0 text-success"><small id="recoveredCasesDelta"></small></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-xl-4 col-md-6 mb-4">
+                    <div class="col-xl-4  mb-4">
                         <div class="card border-left-danger shadow h-100 py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Deaths
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="deathCases"></div>
+                                        <div class="text-center">
+                                            <div class="h6 mb-0 font-weight-bold text-gray-800" id="deathCases"></div>
+                                            <div class= "text mb-0 text-danger">&nbsp;<small id="deathCasesDelta"></small></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -93,43 +102,73 @@
                 </div>
                 <!-- Content Row -->
 
-                <div class="row">
 
                     <!-- Bar Chart -->
-                    <div class="col-xl-6 col-lg-7">
+                    <div class="col-xl-12 col-lg-7">
                         <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">State wise distribution (Top 20)</h6>
+                            <div class="card-header d-flex justify-content-between py-3">
+                                <h6 class="m-0 font-weight-bold text-primary" id="state-div-title">Statewise Status</h6>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitches">
+                                    <label class="custom-control-label font-weight-bold" id="customSwitchesText" for="customSwitches">Chart</label>
+                                </div>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body"  id="state-chart-div" style="display:none">
                                 <div style="height: 450px" class="chart-bar">
                                     <canvas id="myBarChart"></canvas>
                                 </div>
                             </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-xl-6 col-lg-7">
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary" id="timeSeriesChart-header">Spread Trend - All India</h6>
+                            <div id="state-table-div"  >
+                            <div class="card-header py-2">
+                                <form>
+                                    <input id="state-filter-value"class="form-control form-control-sm" type="search" placeholder="Enter a state name to filter">
+                                    <span id="searchClear" class="glyphicon glyphicon-remove-circle"></span>
+                                </form>
                             </div>
                             <div class="card-body">
-                                <div class="card-header py-2">
-                                <select class="form-control form-control-sm" id="state-selector">
-                                </select>
+                                <div style="max-height: 400px; overflow: auto" id="state-table">
                                 </div>
-                                <div style="height: 400px" class="chart-timeseries">
-                                    <canvas id="timeSeriesChart"></canvas>
-                                </div>
+                            </div>
                             </div>
                         </div>
 
                     </div>
 
+                <div class="row vertical-center">
+                    <div class="col-xl-8 col-lg-7">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary" id="timeSeriesChart-header">Spread Trend - All India</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-header py-2">
+                            <select class="form-control form-control-sm" id="state-selector">
+                            </select>
+                        </div>
+                        <div style="height: 400px" class="chart-timeseries">
+                            <canvas id="timeSeriesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+                <div class="col-xl-4 col-lg-7">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary" id="donutChart-header">Case Distribution - All India</h6>
+                        </div>
+                        <div class="card-body">
+
+                            <div style="height: 300px" class="chart-donut">
+                                <canvas id="donutChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
+                </div>
+
 
 
                 <!-- /.container-fluid -->
@@ -151,6 +190,8 @@
             <!-- End of Content Wrapper -->
 
         </div>
+    </div>
+</div>
         <!-- End of Page Wrapper -->
 
         <!-- Scroll to Top Button-->
@@ -171,6 +212,9 @@
 
         <!-- Page level plugins -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+        <link href="https://unpkg.com/tabulator-tables@4.1.4/dist/css/tabulator.min.css" rel="stylesheet">
+        <link href="css/tabululator_custom.css" rel="stylesheet">
+        <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.1.4/dist/js/tabulator.min.js"></script>
 
         <!-- Page level custom scripts -->
         <script src="js/demo/init.js"></script>

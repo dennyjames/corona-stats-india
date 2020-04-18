@@ -13,12 +13,6 @@ app.get("/all/", async function (req, res) {
     res.send(result.rows)
 });
 
-app.get("/states/", async function (req, res) {
-
-    const result = await db.query(db.sql.selectStateQuery);
-    res.send(result.rows)
-});
-
 app.get("/timeseries/", async function (req, res) {
 
     const timeSeries = await db.query(db.sql.selectTimeSeries);
@@ -32,7 +26,7 @@ app.listen(port, function () {
 
 
 
-setTimeout(async () => {
+setInterval(async () => {
     console.log("Refresh job started")
     let response;
     try {
