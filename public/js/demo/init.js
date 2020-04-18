@@ -146,7 +146,7 @@ $.get("/all", function (data, status) {
         data:stateDataForTable,           //load row data from array
         layout:"fitColumns",      //fit columns to width of table
         autoResize:false,
-        responsiveLayout:false,  //hide columns that dont fit on the table
+        responsiveLayout:true,  //hide columns that dont fit on the table
         tooltips:false,            //show tool tips on cells
         movableColumns:false,      //allow column order to be changed
         resizableRows:true,       //allow row order to be changed
@@ -154,21 +154,21 @@ $.get("/all", function (data, status) {
             {column:"case_count", dir:"desc"},
         ],
         columns:[                 //define the table columns
-            {title:"State", field:"state",minWidth:80,frozen:true},
-            {title:"Total", field:"case_count", hozAlign:"left",minWidth:80,cssClass:"total-column-blue",
+            {title:"State", field:"state",minWidth:90,formatter:"textarea"},
+            {title:"Total", field:"case_count", hozAlign:"left",minWidth:50,cssClass:"total-column-blue",
                 sorter:  function(a, b, aRow, bRow, column, dir, sorterParams){
                     return aRow._row.data.totalCases - bRow._row.data.totalCases;
                 },formatter:"textarea"},
-            {title:"Active", field:"activeCases", hozAlign:"left",minWidth:80,cssClass:"active-column-yellow"},
-            {title:"Recovered", field:"recovered_count", hozAlign:"left",minWidth:80, cssClass:"recvrd-column-green",
+            {title:"Active", field:"activeCases", hozAlign:"left",minWidth:50,cssClass:"active-column-yellow",responsive:2},
+            {title:"Recovered", field:"recovered_count", hozAlign:"left",minWidth:40, cssClass:"recvrd-column-green",
                 sorter:  function(a, b, aRow, bRow, column, dir, sorterParams){
                     return aRow._row.data.recoveredCases - bRow._row.data.recoveredCases;
                 },formatter:"textarea"},
-            {title:"Deaths", field:"death_count", hozAlign:"left",minWidth:80, cssClass:"death-column-red",
+            {title:"Deaths", field:"death_count", hozAlign:"left",minWidth:40, cssClass:"death-column-red",
                 sorter:  function(a, b, aRow, bRow, column, dir, sorterParams){
                     return aRow._row.data.deathCases - bRow._row.data.deathCases;
                 },formatter:"textarea"},
-            {title:"Mortality", field:"mortalityRate", hozAlign:"left",responsive:3,minWidth:100},
+            {title:"Mortality", field:"mortalityRate", hozAlign:"left",responsive:3,minWidth:100,},
         ],
     });
 
@@ -187,7 +187,7 @@ $.get("/all", function (data, status) {
         {
             return true;
         }
-        return data.state.toLowerCase().includes (filterParams) ; //must return a boolean, true if it passes the filter.
+        return data.state.toLowerCase().includes (filterParams.toLowerCase()) ; //must return a boolean, true if it passes the filter.
     }
 
     $('#customSwitches').change(function() {
