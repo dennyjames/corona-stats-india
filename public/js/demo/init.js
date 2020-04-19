@@ -155,16 +155,16 @@ $.get("/all", function (data, status) {
         ],
         columns:[                 //define the table columns
             {title:"State", field:"state",minWidth:90,formatter:"textarea"},
-            {title:"Total", field:"case_count", hozAlign:"left",minWidth:50,cssClass:"total-column-blue",
+            {title:"Total", field:"case_count", hozAlign:"left",minWidth:60,cssClass:"total-column-blue",
                 sorter:  function(a, b, aRow, bRow, column, dir, sorterParams){
                     return aRow._row.data.totalCases - bRow._row.data.totalCases;
                 },formatter:"textarea"},
             {title:"Active", field:"activeCases", hozAlign:"left",minWidth:50,cssClass:"active-column-yellow",responsive:2},
-            {title:"Recovered", field:"recovered_count", hozAlign:"left",minWidth:50, cssClass:"recvrd-column-green",
+            {title:"Rcvrd", field:"recovered_count", hozAlign:"left",minWidth:60, cssClass:"recvrd-column-green",
                 sorter:  function(a, b, aRow, bRow, column, dir, sorterParams){
                     return aRow._row.data.recoveredCases - bRow._row.data.recoveredCases;
                 },formatter:"textarea"},
-            {title:"Deaths", field:"death_count", hozAlign:"left",minWidth:50, cssClass:"death-column-red",
+            {title:"Death", field:"death_count", hozAlign:"left",minWidth:60, cssClass:"death-column-red",
                 sorter:  function(a, b, aRow, bRow, column, dir, sorterParams){
                     return aRow._row.data.deathCases - bRow._row.data.deathCases;
                 },formatter:"textarea"},
@@ -331,9 +331,9 @@ $.get("/all", function (data, status) {
             data: {
                 datasets: [{
                     data: [
-                        globalStateData[0].case_count,
-                        globalStateData[0].recovered_count,
-                        globalStateData[0].death_count
+                        globalStateData[0].activeCases,
+                        globalStateData[0].recoveredCases,
+                        globalStateData[0].deathCases
                     ],
                     backgroundColor: ['#2e59d9','#23ba6a','#bf2424'
                     ],
@@ -448,7 +448,7 @@ $.get("/all", function (data, status) {
             doughnut.config.data.datasets[0].data=[];
             let selectedData = globalStateData.filter(i=>i.state===selected.value);
             if(selectedData.length=1) {
-                let dataSetForDonut = [selectedData[0].totalCases,selectedData[0].recoveredCases,selectedData[0].deathCases]
+                let dataSetForDonut = [selectedData[0].activeCases,selectedData[0].recoveredCases,selectedData[0].deathCases]
                 doughnut.config.data.datasets[0].data = dataSetForDonut;
                 doughnut.update();
             }
