@@ -556,8 +556,6 @@ pre code {
 .row {
     display: flex;
     flex-wrap: wrap;
-    margin-right: -.75rem;
-    margin-left: -.75rem
 }
 
 .no-gutters {
@@ -9693,8 +9691,8 @@ a:focus {
 }
 
 .container, .container-fluid {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
 }
 
 .scroll-to-top {

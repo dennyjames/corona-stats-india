@@ -48,7 +48,7 @@ $.get("/all", function (data, status) {
                 data: recoveredCases
             },
             {
-                label: 'Deceased',
+                label: 'Deaths',
                 backgroundColor: '#bf2424',
                 data: deaths
             }]
@@ -246,7 +246,7 @@ $.get("/all", function (data, status) {
                 pointRadius:0
             },
             {
-                label: 'Deceased',
+                label: 'Deaths',
                 borderColor: '#bf2424',
                 data:  data[0].data.map(i=>i.f5),
                 fill:false,
@@ -339,7 +339,7 @@ $.get("/all", function (data, status) {
                     ],
                 }],
                 labels: [
-                    'Active','Recovered,','Death'
+                    'Active','Recovered,','Deaths'
                 ]
             },
             options: {
@@ -427,7 +427,7 @@ $.get("/all", function (data, status) {
                         pointRadius:0
                     },
                     {
-                        label: 'Deceased',
+                        label: 'Deaths',
                         borderColor: '#bf2424',
                         data:  data[selected].data.map(i=>i.f5),
                         fill:false,
