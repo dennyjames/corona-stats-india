@@ -19,6 +19,10 @@ $.get("/all", function (data, status) {
     document.getElementById("totalCases").innerHTML = totalData[0].case_count;
     document.getElementById("recoveredCases").innerHTML = totalData[0].recovered_count;
     document.getElementById("deathCases").innerHTML = totalData[0].death_count;
+    document.getElementById("ActiveCases").innerHTML=totalData[0].activeCases;
+    document.getElementById("overallrecoveryrate").innerHTML=((totalData[0].recoveredCases/totalData[0].case_count)*100).toFixed(2)+' %';
+    document.getElementById("overallmortalityrate").innerHTML=((totalData[0].death_count/totalData[0].case_count)*100).toFixed(2)+' %';
+
     if(totalData[0].totaldelta !=0)
         document.getElementById("totalCasesDelta").innerHTML=`(+${totalData[0].totaldelta})`;
     if(totalData[0].recovereddelta !=0)
@@ -133,6 +137,7 @@ $.get("/all", function (data, status) {
     let stateDataForTable =  data.filter(i=> i.state!=='All India').map(i=>
     {
         i.mortalityRate = ((i.death_count/i.case_count)*100).toFixed(2) +'%';
+        i.recoveredRate =((i.recovered_count/i.case_count)*100).toFixed(2)+'%';
         if(i.totaldelta !=0)
             i.case_count= i.case_count +`\n(+${i.totaldelta})`;
         if(i.recovereddelta !=0)
@@ -168,7 +173,8 @@ $.get("/all", function (data, status) {
                 sorter:  function(a, b, aRow, bRow, column, dir, sorterParams){
                     return aRow._row.data.deathCases - bRow._row.data.deathCases;
                 },formatter:"textarea"},
-            {title:"Mortality", field:"mortalityRate", hozAlign:"left",responsive:3,minWidth:100,},
+            {title:"Mortality", field:"mortalityRate", hozAlign:"left",responsive:2,minWidth:100,},
+            {title:"RecoveryRate",field:"recoveredRate",hozAlign:"left",responsive:2,minWidth:100,},
         ],
     });
 
@@ -194,7 +200,7 @@ $.get("/all", function (data, status) {
       if($(this).is(':checked'))
       {
           $('#customSwitchesText').html("Table");
-          $('#state-div-title').html("Statewise Status Chart (Top 20)");
+          $('#state-div-title').html("Statewise Chart (Top 20)");
           $('#state-table-div').hide();
           $('#state-chart-div').show();
       }

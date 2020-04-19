@@ -48,7 +48,7 @@
                 <div class="text-center d-flex justify-content-between" style="margin-bottom:-0.75rem">
 
 
-                    <div class="col-xl-4 mb-4">
+                    <div class="col-xl-2 mb-4">
                         <div class="card border-left-primary shadow h-100 py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
@@ -66,7 +66,7 @@
                         </div>
                     </div>
 
-                    <div class="col-xl-4  mb-4">
+                    <div class="col-xl-2  mb-4">
                         <div class="card border-left-success shadow h-100 py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
@@ -84,7 +84,7 @@
                         </div>
                     </div>
 
-                    <div class="col-xl-4  mb-4">
+                    <div class="col-xl-2  mb-4">
                         <div class="card border-left-danger shadow h-100 py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
@@ -100,9 +100,64 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <div class="col-xl-2 mb-4">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Active Cases
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="h6 mb-0 font-weight-bold text-gray-800" id="ActiveCases"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-2  mb-4">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Recovery Rate
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="h6 mb-0 font-weight-bold text-gray-800" id="overallrecoveryrate"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-xl-2  mb-4">
+                        <div class="card border-left-danger shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Mortality Rate
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="h6 mb-0 font-weight-bold text-gray-800" id="overallmortalityrate"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
                 </div>
                 <div class="panel-footer d-flex justify-content-end small" style="padding-right:0.5rem;padding-bottom:0.5rem">
-                     *Marked in (+***) is latest increase in count
+                     *Marked in (+) is latest increase in count
                    </div>
             </div>
                 <!-- Content Row -->
@@ -111,7 +166,7 @@
                     <div class="col-xl-12 col-lg-7">
                         <div class="card shadow mb-4">
                             <div class="card-header d-flex justify-content-between py-3">
-                                <h6 class="m-0 font-weight-bold text-primary" id="state-div-title">Statewise Status</h6>
+                                <h6 class="m-0 font-weight-bold text-primary" id="state-div-title">Statewise Table</h6>
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="customSwitches">
                                     <label class="custom-control-label font-weight-bold" id="customSwitchesText" for="customSwitches">Chart</label>
