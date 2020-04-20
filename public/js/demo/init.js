@@ -161,7 +161,7 @@ $.get("/all", function (data, status) {
         rowClick:function(e, row){
             $("#state-selector").val(row._row.data.state).trigger('change');
         },
-        rowTap:function(e, row){
+        rowDblTap:function(e, row){
             $("#state-selector").val(row._row.data.state).trigger('change');
         },
         columns: [                 //define the table columns
