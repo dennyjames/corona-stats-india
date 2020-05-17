@@ -70,7 +70,7 @@ setInterval(async () => {
                 }
             }
         }
-        if (cells.length === 5) {
+        if (cells.length === 5 && cells[0].children.length>0) {
             for (let j = 1; j < cells.length; j++) {
                 //state name
                 if (j === 1) {
